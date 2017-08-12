@@ -8,69 +8,75 @@
   <title>Ryan Neil Stroud</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="styles/main.css">
+  <script src="https://unpkg.com/vue"></script>
 </head>
 
 <body class="pen">
-  <nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle x collapsed" data-toggle="collapse" data-target="#navbar-collapse-x">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#top"></a>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="navbar-collapse-x">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">about <span class="sr-only">(current)</span></a></li>
-          <li><a href="#experience">experience</a></li>
-          <li><a href="#github">github</a></li>
-          <li><a href="#contact">contact</a></li>
-        </ul>
-      </div> <!-- /.navbar-collapse -->
-    </div> <!-- /.container-fluid -->
-  </nav> <!-- /.navbar-default -->
-  <div class="about">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-4 col-xs-12 mugshot">
-          <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/10509531_10154330287630156_8809865692358075226_n.jpg?oh=684311acbb06f7ea0e03049babdad4ce&oe=59F99BCF">
+  <div id="app">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle x collapsed" data-toggle="collapse" data-target="#navbar-collapse-x">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#top"></a>
         </div>
-        <div class="col-sm-8 col-xs-12 introduction">
-          <div>
-            <h1>Hello World</h1>
-            <p>I’m Ryan. I’m a front-end developer. Whether iOS, Android or web, I’m your man!</p>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-x">
+          <ul class="nav navbar-nav">
+            <!-- <li class="active"><a href="#about">about</a></li>
+            <li><a href="#experience">experience</a></li>
+            <li><a href="#github">github</a></li>
+            <li><a href="#contact">contact</a></li> -->
+            <li :class="{ active: isActive.about }" @click='activate("about")'><a href="#about">about</a></li>
+            <li :class="{ active: isActive.experience }" @click='activate("experience")'><a href="#experience">experience</a></li>
+            <li :class="{ active: isActive.github }" @click='activate("github")'><a href="#github">github</a></li>
+            <li :class="{ active: isActive.contact }" @click='activate("contact")'><a href="#contact">contact</a></li>
+          </ul>
+        </div> <!-- /.navbar-collapse -->
+      </div> <!-- /.container-fluid -->
+    </nav> <!-- /.navbar-default -->
+    <div class="about outer-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4 col-xs-12 mugshot">
+            <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/10509531_10154330287630156_8809865692358075226_n.jpg?oh=684311acbb06f7ea0e03049babdad4ce&oe=59F99BCF">
+          </div>
+          <div class="col-sm-8 col-xs-12 introduction">
+            <div>
+              <h1>{{ greeting }}</h1>
+              <p>I’m Ryan. I’m a front-end developer. Whether iOS, Android or web, I’m your man!</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="contact">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6 col-sm-offset-3 col-xs-12">
-          <form action="https://www.enformed.io/gi9n6t7k" method="POST">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input name="name" class="form-control" placeholder="John Appleseed">
-              <!-- <small id="nameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" name="email" class="form-control" placeholder="johnappleseed@me.com">
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea type="text" name="message" class="form-control" placeholder="Hello Ryan!"/></textarea>
-            </div>
-            <div class="form-group">
-              <input type="hidden" name="*redirect" value="https://ryanneilstroud.github.io/success.html" />
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+    <div class="contact outer-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3 col-xs-12">
+            <form action="https://www.enformed.io/gi9n6t7k" method="POST">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input name="name" class="form-control" placeholder="John Appleseed">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" class="form-control" value="" placeholder="johnappleseed@me.com">
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea type="text" name="message" class="form-control" placeholder="Hello Ryan! I'd like to talk to you about a project.."/></textarea>
+              </div>
+              <!-- <div class="form-group">
+                <input type="hidden" name="*redirect" value="https://ryanneilstroud.github.io/success.html" />
+              </div> -->
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -78,5 +84,31 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    greeting: 'Hello World',
+    isActive: {
+      about: true,
+      experience: false,
+      github: false,
+      contact: false
+    },
+  },
+  mounted() {
+    let url = window.location.href;
+    let key = url.substring(url.lastIndexOf('#') + 1);
+    this.activate(key);
+  },
+  methods: {
+    activate(key) {
+      for (var tab in this.isActive) {
+        this.isActive[tab] = (tab == key);
+      }
+    }
+  }
+})
+</script>
 
 </html>
