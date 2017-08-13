@@ -26,10 +26,26 @@ textarea {
 }
 
 .navbar-default {
+  background-color: $white;
   margin-bottom: 0;
 
   .navbar-header {
     background-color: $white;
+  }
+
+  #navbar-collapse-x {
+    .navbar-nav {
+      li {
+        > a {
+          text-align: center;
+        }
+
+        &.active > a {
+          background-color: transparent;
+          color: $primary-color;
+        }
+      }
+    }
   }
 }
 
@@ -38,10 +54,18 @@ textarea {
 
   &:nth-child(even) {
     background-color: $primary-color;
+
+    h1, p {
+      color: $white;
+    }
+
+    .btn.btn-primary {
+      background-color: $primary-darken-color;
+    }
   }
 } // .outer-container
 
-.about {
+#about {
   @include phone {
     text-align: center;
   }
@@ -88,18 +112,49 @@ textarea {
       align-items: center;
       display: flex;
       margin-left: 15px;
-
-      h1,
-      p {
-        color: $white;
-      }
     } // .introduction
   } // .row
-} // .about
+} // #about
 
-.contact {
+#experience {
+  h1 {
+    text-align: center;
+  }
+} // #contact
 
-} // .contact
+#github {
+  h1 {
+    text-align: center;
+  }
+
+  .img {
+    display: block;
+    margin: 15px auto 25px;
+    max-height: 200px;
+    max-width: 166.25px;
+  }
+} // #github
+
+#contact {
+  h1 {
+    text-align: center;
+  }
+} // #contact
+
+.footer {
+  background-color: $primary-color;
+
+  .row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+
+    a {
+      color: $white;
+      margin: 15px;
+    }
+  }
+} // .footer
 
 .pen .navbar-toggle {
   border: none;

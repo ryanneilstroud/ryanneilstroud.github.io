@@ -12,3 +12,8 @@ gulp.task('sass', function () {
 gulp.task('sass:watch', function () {
   gulp.watch('./src/sass/**/*.scss', ['sass']);
 });
+
+// gulp.task('fonts', function() {
+//   return gulp.src('node_modules/font-awesome/fonts/*')
+//     .pipe(gulp.dest('fonts/font-awesome'))
+// })

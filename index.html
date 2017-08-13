@@ -27,10 +27,6 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse-x">
           <ul class="nav navbar-nav">
-            <!-- <li class="active"><a href="#about">about</a></li>
-            <li><a href="#experience">experience</a></li>
-            <li><a href="#github">github</a></li>
-            <li><a href="#contact">contact</a></li> -->
             <li :class="{ active: isActive.about }" @click='activate("about")'><a href="#about">about</a></li>
             <li :class="{ active: isActive.experience }" @click='activate("experience")'><a href="#experience">experience</a></li>
             <li :class="{ active: isActive.github }" @click='activate("github")'><a href="#github">github</a></li>
@@ -39,7 +35,7 @@
         </div> <!-- /.navbar-collapse -->
       </div> <!-- /.container-fluid -->
     </nav> <!-- /.navbar-default -->
-    <div class="about outer-container">
+    <div id="about" class="outer-container">
       <div class="container">
         <div class="row">
           <div class="col-sm-4 col-xs-12 mugshot">
@@ -47,16 +43,42 @@
           </div>
           <div class="col-sm-8 col-xs-12 introduction">
             <div>
-              <h1>{{ greeting }}</h1>
+              <h1>Hello World</h1>
               <p>I’m Ryan. I’m a front-end developer. Whether iOS, Android or web, I’m your man!</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="contact outer-container">
+    <div id="experience" class="outer-container">
       <div class="container">
         <div class="row">
+          <h1>Experience</h1>
+          <div class="col-sm-6 col-sm-offset-3 col-xs-12">
+            <form target="_blank" action="https://goo.gl/2PNU3w" method="get">
+              <button class="btn btn-primary">Check out my resume!</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div> <!-- experience -->
+    <div id="github" class="outer-container">
+      <div class="container">
+        <div class="row">
+          <h1>GitHub</h1>
+          <div class="col-sm-6 col-sm-offset-3 col-xs-12">
+            <img class="img" src="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png" alt="GitHub">
+            <form target="_blank" action="https://github.com/ryanneilstroud" method="get">
+              <button class="btn btn-primary">Check me out!</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div> <!-- github -->
+    <div id="contact" class="outer-container">
+      <div class="container">
+        <div class="row">
+          <h1>Contact</h1>
           <div class="col-sm-6 col-sm-offset-3 col-xs-12">
             <form action="https://www.enformed.io/gi9n6t7k" method="POST">
               <div class="form-group">
@@ -71,24 +93,39 @@
                 <label for="message">Message</label>
                 <textarea type="text" name="message" class="form-control" placeholder="Hello Ryan! I'd like to talk to you about a project.."/></textarea>
               </div>
-              <!-- <div class="form-group">
+              <div class="form-group">
                 <input type="hidden" name="*redirect" value="https://ryanneilstroud.github.io/success.html" />
-              </div> -->
+              </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
           </div>
         </div>
       </div>
-    </div>
+    </div> <!-- contact -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <a target="_blank" href="https://github.com/ryanneilstroud">
+            <i class="fa fa-github" aria-hidden="true"></i>
+          </a>
+          <a target="_blank" href="https://www.linkedin.com/in/ryanneilstroud">
+            <i class="fa fa-linkedin" aria-hidden="true"></i>
+          </a>
+          <a target="_blank" href="https://www.facebook.com/ryanneilstroud">
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
   </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/587c62ab32.js"></script>
 <script>
 new Vue({
   el: '#app',
   data: {
-    greeting: 'Hello World',
+    // isCollapsed: true,
     isActive: {
       about: true,
       experience: false,
@@ -101,11 +138,31 @@ new Vue({
     let key = url.substring(url.lastIndexOf('#') + 1);
     this.activate(key);
   },
+  computed: {
+    menuIsCollapsed: {
+      get: function() {
+        return this.isCollapsed
+      },
+      set: function(value) {
+        this.isCollapsed = value
+      }
+    }
+  },
   methods: {
     activate(key) {
       for (var tab in this.isActive) {
         this.isActive[tab] = (tab == key);
       }
+      this.toggleMenu();
+      this.scrollToSection(key);
+    },
+    toggleMenu() {
+      $('#navbar-collapse-x').collapse('hide')
+    },
+    scrollToSection(id) {
+      $('html, body').animate({
+        scrollTop: $("#" + id).offset().top
+      }, 500);
     }
   }
 })
